@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-    <title>PA#2</title>
+    <title>PA#1#Fitsai</title>
     <style>
-        body {
-            background-color: #EEEEEE;
-        }
+      body {
+        background-color: #eeeeee;
+      }
     </style>
 
     <script src="./Utils/trackball-rotator.js"></script>
     <script src="./Utils/m4.js"></script>
     <script src="./shader.gpu"></script>
     <script src="./main.js"></script>
-
-</head>
-
-<body onload="init()">
-
+  </head>
+  <body onload="init()">
     <h2>Continuous Topographic Surface of Cassini</h2>
-    <h2> with "Trackball" Mouse Rotation</h2>
+    <h2>with "Trackball" Mouse Rotation</h2>
 
-    <p id="message">Drag your mouse on the cube to rotate it.<br>
-        (On a touch screen, you can use your finger.)</p>
-
+    <p id="message">
+      Drag your mouse on the cube to rotate it.<br />
+      (On a touch screen, you can use your finger.)
+    </p>
 
     <div>
-        <label >Model color</label>
-        <label for="m_red">Red</label>
-        <input type="number" name="m_red" id="m_red" min="0" max="1" step="0.05" value="0.5">
-        <label for="m_green">Green</label>
-        <input type="number" name="m_green" id="m_green" min="0" max="1" step="0.05" value="0.5">
-        <label for="m_blue">Blue</label>
-        <input type="number" name="m_blue" id="m_blue" min="0" max="1" step="0.05" value="0.05">
-        <br>
-        <label >Background color</label>
-        <label for="reb_redd">Red</label>
-        <input type="number" name="b_red" id="b_red" min="0" max="1" step="0.05" value="0.35">
-        <label for="b_green">Green</label>
-        <input type="number" name="b_green" id="b_green" min="0" max="1" step="0.05" value="0.45">
-        <label for="b_blue">Blue</label>
-        <input type="number" name="b_blue" id="b_blue" min="0" max="1" step="0.05" value="0.67">
-    </div>
+      <div>
+        <label for="foView">FOV</label>
+        <input type="range" name="foView" id="foView" min="1" max="120" value="20" step="1"
+        />
+      </div>
+      <div>
+        <label for="ncDist">Clipping distance</label>
+        <input type="range" name="ncDist" id="ncDist" min="5" max="15" value="8" step="0.1"
+        />
+      </div>
+      <div>
+        <label for="converg">Convergence</label>
+        <input type="range" name="converg"id="converg" min="0.5" max="5" value="5" step="0.1"
+        />
+      </div>
+      <div>
+        <label for="eyeSep">Eye Separation</label>
+        <input type="range" name="eyeSep" id="eyeSep" min="0" max="2" value="0.8" step="0.01"
+        />
+      </div>
 
+
+    </div>
     <div id="canvas-holder">
-        <canvas width="600" height="600" id="webglcanvas" style="background-color:red"></canvas>
+      <canvas width="800" height="800" id="webglcanvas" style="background-color: red"
+      ></canvas>
     </div>
-
-
-</body>
-
+  </body>
 </html>

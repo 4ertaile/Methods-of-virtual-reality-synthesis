@@ -1,16 +1,17 @@
+
+
 // Vertex shader
 const vertexShaderSource = `
 attribute vec3 vertex;
-attribute vec3 normal;
-uniform mat4 ModelViewProjectionMatrix, normalMat;
-varying vec3 normalInterp;
-varying vec3 vertPos;
+attribute vec2 texture;
+varying vec2 vTexture;
+uniform mat4 ModelViewProjectionMatrix;
 
 void main() {
-    normalInterp = vec3(normalMat * vec4(normal, 0.0));
-    gl_Position = ModelViewProjectionMatrix * vec4(vertex, 1.0);
-}
-`;
+    vTexture = texture;
+    gl_Position = ModelViewProjectionMatrix * vec4(vertex,1.0);
+}`;
+
 
 // Fragment shader
 const fragmentShaderSource = `
@@ -19,29 +20,13 @@ const fragmentShaderSource = `
 #else
    precision mediump float;
 #endif
-
+varying vec2 vTexture;
+uniform sampler2D tmu;
 uniform vec4 color;
-varying vec3 normalInterp;
-varying vec3 vertPos;
-
-uniform vec3 diffuseColor;
-
 void main() {
-    vec3 N = normalize(normalInterp);
-    vec3 lightDir = vec3(1.0, 1.0, 1.0);
-
-    // Lambert's cosine law
-    float lambertian = max(dot(N, lightDir), 0.0);
-    float specular = 0.0;
-    if (lambertian > 0.0) {
-        vec3 R = reflect(-lightDir, N);      // Reflected light vector
-        vec3 V = normalize(-vertPos); // Vector to viewer
-        // Compute the specular term
-        float specAngle = max(dot(R, V), 0.0);
-        specular = pow(specAngle, 10.0);
+    vec4 textureColor = texture2D(tmu, vTexture);
+    gl_FragColor = textureColor;
+    if(textureColor.r==0.0){
+        gl_FragColor = vec4(1.0);
     }
-    vec3 ambientColor = 0.2 * diffuseColor;
-    vec3 specularColor = vec3(1);
-    gl_FragColor = vec4(ambientColor + lambertian * diffuseColor + specular * specularColor, 1.0);
-}
-`;
+}`;
