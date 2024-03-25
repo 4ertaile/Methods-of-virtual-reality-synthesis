@@ -319,7 +319,7 @@ function LoadTexture() {
 
     const image = new Image();
     image.crossOrigin = 'anonymus';
-    image.src = "https://raw.githubusercontent.com/4ertaile/Surface-Rendering/CGW/Texture.jpg";
+    image.src = "https://raw.githubusercontent.com/4ertaile/Methods-of-virtual-reality-synthesis/PA1/texture.jpg";
     image.onload = () => {
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.texImage2D(
